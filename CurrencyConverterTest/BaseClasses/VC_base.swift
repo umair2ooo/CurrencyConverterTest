@@ -6,3 +6,12 @@ class VC_base: UIViewController {
         super.viewDidLoad()
     }
 }
+
+
+extension VC_base : ShowErrorProtocol {
+    
+    
+    func showError(message: String) {
+        self.showAlert(title: "Error", message: message)
+    }
+}

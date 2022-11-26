@@ -21,20 +21,24 @@ class WebServices {
     }
     
     
-    static func timeseries(from : String, to : String, completion : @escaping (ConvertedResponse?, String?)->()) {
+    static func timeseries(startDate : String,
+                           endDate : String,
+                           symbols: String,
+                           baseCurrency: String,
+                           completion : @escaping (HistoricalRatesProtocol?, String?)->()) {
 
-        let router = Router.timeseries(from: from, to: to).getURL
-        HTTP.execute(request: router, type: ConvertedResponse.self) { model, error in
-            completion(model as? ConvertedResponse, error)
+        let router = Router.timeseries(startDate: startDate, endDate: endDate, symbols: symbols, baseCurrency: baseCurrency).getURL
+        HTTP.execute(request: router, type: HistoricalRates.self) { model, error in
+            completion(model as? HistoricalRatesProtocol, error)
         }
     }
     
     
-    static func historicalRates(fromDate: String, symbols: String, baseCurrency: String, completion : @escaping (ConvertedResponse?, String?)->()) {
+    static func popularCurr(completion : @escaping (PopularCurrRatesProtocol?, String?)->()) {
 
-        let router = Router.historicalRates(fromDate: fromDate, symbols: symbols, baseCurrency: baseCurrency).getURL
-        HTTP.execute(request: router, type: ConvertedResponse.self) { model, error in
-            completion(model as? ConvertedResponse, error)
+        let router = Router.latest.getURL
+        HTTP.execute(request: router, type: PopularCurrencyRates.self) { model, error in
+            completion(model as? PopularCurrRatesProtocol, error)
         }
     }
 }

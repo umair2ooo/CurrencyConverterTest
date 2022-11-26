@@ -6,10 +6,7 @@ class HistoricalRates: ModelBase {
     var rates: [String: [String: Double]]?
     var startDate: String?
     var timeseries: Bool?
-    
-    var ratesArray : [RateArrayClass] {
-        rates!.compactMap{RateArrayClass(date:$0.key, currencies: $0.value.compactMap{ ParticularCurrency(currency:$0.key, rate: $0.value)}.sorted{$0.currency<$1.currency})}.sorted{$0.date>$1.date}
-    }
+
     
 
     enum CodingKeys: String, CodingKey {
@@ -47,9 +44,16 @@ class HistoricalRates: ModelBase {
 
 extension HistoricalRates : ErrorVerificationInDecodable {}
 
+extension HistoricalRates : HistoricalRatesProtocol {
+    var ratesArray: [RateArrayModel] {
+
+        return rates!.compactMap{RateArrayModel(date:$0.key, currencies: $0.value.compactMap{ ParticularCurrency(currency:$0.key, rate: $0.value)}.sorted{$0.currency<$1.currency})}.sorted{$0.date>$1.date}
+    }
+}
 
 
-struct RateArrayClass {
+
+struct RateArrayModel {
     let date : String
     let currencies : [ParticularCurrency]
 }

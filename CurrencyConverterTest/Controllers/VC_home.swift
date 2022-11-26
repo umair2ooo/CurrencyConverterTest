@@ -4,11 +4,14 @@ class VC_home: VC_base {
 
     @IBOutlet weak var tf_from: UITextField! {didSet { self.tf_from.inputView = self.picker}}
     @IBOutlet weak var tf_to: UITextField! {didSet {self.tf_to.inputView = self.picker}}
-    @IBOutlet weak var tf_fromInput: UITextField! { didSet { tf_fromInput.addTarget(self, action: #selector(VC_home.textFieldDidChange(_:)), for: .editingChanged) }
+    @IBOutlet weak var tf_fromInput: UITextField! {
+        didSet { tf_fromInput.addTarget(self, action: #selector(VC_home.textFieldDidChange(_:)), for: .editingChanged) }
     }
-    @IBOutlet weak var tf_toInput: UITextField! { didSet { tf_toInput.addTarget(self, action: #selector(VC_home.textFieldDidChange(_:)), for: .editingChanged) } }
+    @IBOutlet weak var tf_toInput: UITextField! {
+        didSet { tf_toInput.addTarget(self, action: #selector(VC_home.textFieldDidChange(_:)), for: .editingChanged) }
+    }
     
-    private var vm : VM_home?
+    private var vm : VM_currencyConversion?
     private var isFirst = true
     private var picker : UIPickerView {
         let pickerView = UIPickerView()
@@ -20,7 +23,7 @@ class VC_home: VC_base {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.vm = VM_home(uidelegate: self)
+        self.vm = VM_currencyConversion(uidelegate: self, errorDelegate: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -32,6 +35,7 @@ class VC_home: VC_base {
     }
     
     @IBAction func action_details(_ sender: Any) {
+        self.vm?.showHistory()
     }
     
     private func swap() {
@@ -45,6 +49,13 @@ class VC_home: VC_base {
         
         self.vm?.valuesSwapped()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? VC_history, let rates = sender as? HistoricalRates {
+            vc.history = rates
+        }
+    }
 }
 
 
@@ -53,42 +64,8 @@ extension VC_home : UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         self.isFirst = (textField == self.tf_from) || (textField == self.tf_fromInput)
-        
-        /*
-        if (textField == self.tf_to) ||
-            (textField == self.tf_from) {
-            self.vm?.currentInputObject(input: (textField == self.tf_from) ? .from : .to)
-        }
-        
-        if (textField == self.tf_fromInput) ||
-            (textField == self.tf_toInput) {
-            self.vm?.currentInputObject(input: (textField == self.tf_fromInput) ? .inputFrom : .inputTo)
-        }
-        */
-        
         return true
     }
-    
-    /*
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (textField == self.tf_fromInput) ||
-            (textField == self.tf_toInput) {
-            
-            if let text = textField.text,
-               let textRange = Range(range, in: text) {
-                let updatedText = text.replacingCharacters(in: textRange,
-                                                           with: string)
-                
-                print("updatedText : \(updatedText)")
-                do {
-//                    self.vm?.updateCurrentAmout(amount: updatedText)
-                }
-            }
-        }
-        
-        return true
-    }
-    */
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -114,7 +91,6 @@ extension VC_home : UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if self.vm!.currencies.count > 0 {
-            print("row : \(self.vm!.currencies[row])")
             self.vm?.updateValueForPicker(currency: self.vm!.currencies[row], isFirst_head: self.isFirst)
         }
     }
@@ -136,9 +112,11 @@ extension VC_home : ResponderProtocol {
     }
     
     
-    func fillPickerInitial(currencyFirst: Int, currencySecond: Int, firstText: String?, secondText: String?, isSwape : Bool) {
-        
-
+    func fillPickerInitial(currencyFirst: Int, currencySecond: Int, firstText: String?, secondText: String?) {
+        self.tf_from.getPicker?.selectRow(currencyFirst, inComponent: 0, animated: false)
+        self.tf_to.getPicker?.selectRow(currencySecond, inComponent: 0, animated: false)
+        self.tf_from.text = firstText
+        self.tf_to.text = secondText
     }
     
     
@@ -168,12 +146,8 @@ extension VC_home : ResponderProtocol {
     }
     
     
-    func historicalRates(rates: HistoricalRates) {
+    func historicalRates(rates: HistoricalRatesProtocol) {
         self.performSegue(withIdentifier: "segue_showHistory", sender: rates)
-    }
-    
-    func showError(message: String) {
-        self.showAlert(title: "Error", message: message)
     }
 }
 

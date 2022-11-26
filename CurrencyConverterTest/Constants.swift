@@ -9,6 +9,10 @@ struct Constants {
         static let noData = "No data"
         static let invalidStatusCode = "There is something wrong, status code:"
         static let currenciesToLocal = "currencies"
+        static let noHistoryRecordFound = "No history record found"
+        static let history = "History"
+        static let from = "From"
+        static let to = "to"
     }
     
     struct APIErrors {

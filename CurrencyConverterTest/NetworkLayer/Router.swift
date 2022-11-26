@@ -41,9 +41,9 @@ public struct HTTPMethod: RawRepresentable, Equatable, Hashable {
 
 
 
-//fileprivate let k_baseUrl = "https://api.apilayer.com/exchangerates_data/"
+
 fileprivate let k_baseUrl = "https://api.apilayer.com/fixer/"
-//fileprivate let k_baseUrl = "http://dataservices.imf.org/"
+
 
 fileprivate let k_org = "orgs"
 fileprivate let k_latest = "latest?"
@@ -52,29 +52,18 @@ fileprivate let k_symbols = "symbols"
 fileprivate let k_convert = "convert"
 fileprivate let k_timeseries = "timeseries"
 
-//convert?to=to&from=from&amount=amount
-//https://data.fixer.io/api/2013-12-24
-//    ? access_key = API_KEY
-//    & base = GBP
-//    & symbols = USD,CAD,EUR
 
-
-//https://data.fixer.io/api/2013-12-24
-//    ? access_key = API_KEY
-//    & base = GBP
-//    & symbols = USD,CAD,EUR
 
 enum Router {
 
     case latest
     case symbols
     case convert(from: String, to : String, amount : Double)
-    case timeseries(from : String, to : String)
-    case historicalRates(fromDate :String, symbols: String, baseCurrency : String)
-//https://api.apilayer.com/fixer/2022-11-20?symbols=AED%2CAFN%2CUSD%2CPKR%2CGBP%2CJPY%2CEUR&base=USD
+    case timeseries(startDate : String, endDate : String, symbols: String, baseCurrency : String)
+
     
     
-//https://api.apilayer.com/fixer/timeseries?start_date=2022-11-20&end_date=2022-11-24
+
 
     private var serverMethod: String {
         
@@ -92,9 +81,6 @@ enum Router {
             
         case .timeseries:
             return k_timeseries
-            
-        case .historicalRates:
-            return ""
         }
     }
     
@@ -109,11 +95,8 @@ enum Router {
         case let .convert(from, to, amount):
             return "&to=\(to)&from=\(from)&amount=\(amount)"
             
-        case let .timeseries(from, to):
-            return "?access_key=\(k_APIKey)&start_date=\(to)&end_date=\(from)"
-            
-        case let .historicalRates(fromDate, symbols, baseCurrency):
-            return "\(fromDate)?symbols=\(symbols)&base=\(baseCurrency)"
+        case let .timeseries(statDate, endDate, symobls, baseCurrency):
+            return "?start_date=\(statDate)&end_date=\(endDate)&symbols=\(symobls)&base=\(baseCurrency)"
             
         default:
             return ""
@@ -125,7 +108,7 @@ enum Router {
     {
         switch self
         {
-        case .latest, .symbols, .convert, .timeseries, .historicalRates:
+        case .latest, .symbols, .convert, .timeseries:
             return .get
         }
     }

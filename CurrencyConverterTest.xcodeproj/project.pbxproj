@@ -13,6 +13,10 @@
 		60022A262932076200CEB891 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60022A252932076200CEB891 /* UserDefaults+Extension.swift */; };
 		60022A292932079400CEB891 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60022A282932079400CEB891 /* Helper.swift */; };
 		60022A2B293207C800CEB891 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60022A2A293207C800CEB891 /* Date+Extension.swift */; };
+		600EACEE293277AD006F8B4F /* VC_history.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600EACED293277AD006F8B4F /* VC_history.swift */; };
+		600EACF0293277CD006F8B4F /* VM_historicalCurrencyRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600EACEF293277CD006F8B4F /* VM_historicalCurrencyRates.swift */; };
+		600EACF2293277E3006F8B4F /* VM_popularCurrencyRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600EACF1293277E3006F8B4F /* VM_popularCurrencyRates.swift */; };
+		600EACF429327803006F8B4F /* PopularCurrencyRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600EACF329327803006F8B4F /* PopularCurrencyRates.swift */; };
 		601CB89C2931085100075C7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601CB89B2931085100075C7B /* Constants.swift */; };
 		601CB89E293108A800075C7B /* ModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601CB89D293108A800075C7B /* ModelBase.swift */; };
 		601CB8A02931096E00075C7B /* ConvertedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601CB89F2931096E00075C7B /* ConvertedResponse.swift */; };
@@ -42,6 +46,10 @@
 		60022A252932076200CEB891 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		60022A282932079400CEB891 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		60022A2A293207C800CEB891 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		600EACED293277AD006F8B4F /* VC_history.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VC_history.swift; sourceTree = "<group>"; };
+		600EACEF293277CD006F8B4F /* VM_historicalCurrencyRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VM_historicalCurrencyRates.swift; sourceTree = "<group>"; };
+		600EACF1293277E3006F8B4F /* VM_popularCurrencyRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VM_popularCurrencyRates.swift; sourceTree = "<group>"; };
+		600EACF329327803006F8B4F /* PopularCurrencyRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCurrencyRates.swift; sourceTree = "<group>"; };
 		601CB89B2931085100075C7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		601CB89D293108A800075C7B /* ModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBase.swift; sourceTree = "<group>"; };
 		601CB89F2931096E00075C7B /* ConvertedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedResponse.swift; sourceTree = "<group>"; };
@@ -104,8 +112,8 @@
 		605973DB292FCDCB0014115F /* CurrencyConverterTest */ = {
 			isa = PBXGroup;
 			children = (
-				60022A272932078B00CEB891 /* Utls */,
 				601CB89B2931085100075C7B /* Constants.swift */,
+				60022A272932078B00CEB891 /* Utls */,
 				608DB65E2930C2C500E79648 /* Protocols & Enums */,
 				608DB65D2930C29300E79648 /* BaseClasses */,
 				608DB65A2930C27B00E79648 /* NetworkLayer */,
@@ -150,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				601CB8AB29310B9C00075C7B /* VM_currencyConversion.swift */,
+				600EACEF293277CD006F8B4F /* VM_historicalCurrencyRates.swift */,
+				600EACF1293277E3006F8B4F /* VM_popularCurrencyRates.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -158,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				601CB8A929310B6400075C7B /* VC_home.swift */,
+				600EACED293277AD006F8B4F /* VC_history.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +198,7 @@
 				601CB89F2931096E00075C7B /* ConvertedResponse.swift */,
 				601CB8A1293109A600075C7B /* Symbols.swift */,
 				60022A212932065000CEB891 /* HistoricalRates.swift */,
+				600EACF329327803006F8B4F /* PopularCurrencyRates.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,6 +279,7 @@
 				601CB8A4293109D300075C7B /* Data+Extension.swift in Sources */,
 				601CB89E293108A800075C7B /* ModelBase.swift in Sources */,
 				60022A2B293207C800CEB891 /* Date+Extension.swift in Sources */,
+				600EACEE293277AD006F8B4F /* VC_history.swift in Sources */,
 				601CB8A02931096E00075C7B /* ConvertedResponse.swift in Sources */,
 				601CB8AC29310B9C00075C7B /* VM_currencyConversion.swift in Sources */,
 				608DB66B2930C38C00E79648 /* WebServices.swift in Sources */,
@@ -278,12 +291,15 @@
 				601CB8A2293109A600075C7B /* Symbols.swift in Sources */,
 				60022A262932076200CEB891 /* UserDefaults+Extension.swift in Sources */,
 				608DB6692930C38000E79648 /* NetworkService.swift in Sources */,
+				600EACF2293277E3006F8B4F /* VM_popularCurrencyRates.swift in Sources */,
 				601CB8A629310AC900075C7B /* VC_base.swift in Sources */,
+				600EACF429327803006F8B4F /* PopularCurrencyRates.swift in Sources */,
 				605973DF292FCDCB0014115F /* SceneDelegate.swift in Sources */,
 				60022A222932065000CEB891 /* HistoricalRates.swift in Sources */,
 				60022A24293206AF00CEB891 /* UIViewController+Extension.swift in Sources */,
 				60022A292932079400CEB891 /* Helper.swift in Sources */,
 				608DB66F2930C3D800E79648 /* Enums.swift in Sources */,
+				600EACF0293277CD006F8B4F /* VM_historicalCurrencyRates.swift in Sources */,
 				608DB66D2930C3CF00E79648 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
