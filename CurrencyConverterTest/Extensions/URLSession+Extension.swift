@@ -89,11 +89,20 @@ extension URLSession: NetworkLoader {
 
 extension URLSession {
     
-    func cancelTaskWithUrl(_ currentRequest: String) {
+    func cancelTaskWithUrl(_ currentRequest: String? = nil, shouldCancelAll : Bool = false) {
+        
         self.getAllTasks { tasks in
             
             let runningTasks = tasks.filter { $0.state == .running }
             
+            guard shouldCancelAll == false else {
+                runningTasks.forEach { task in
+                    task.cancel()
+                }
+                return
+            }
+            
+            guard let currentRequest = currentRequest else { return }
             runningTasks.forEach { task in
                 
                 if let previousRequest = task.originalRequest?.url?.absoluteString {
