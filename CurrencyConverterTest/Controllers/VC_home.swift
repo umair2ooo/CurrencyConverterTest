@@ -11,7 +11,7 @@ class VC_home: VC_base {
         didSet { tf_toInput.addTarget(self, action: #selector(VC_home.textFieldDidChange(_:)), for: .editingChanged) }
     }
     
-    private var vm : VM_currencyConversion?
+    private var vm : CurrencyConversionProtocol?
     private var isFirst = true
     private var picker : UIPickerView {
         let pickerView = UIPickerView()
@@ -44,15 +44,15 @@ class VC_home: VC_base {
         
         self.tf_to.getPicker?.selectRow(rowFrom, inComponent: 0, animated: false)
         self.tf_from.getPicker?.selectRow(rowTo, inComponent: 0, animated: false)
-        self.tf_to.text = self.vm?.currencies[rowFrom]
-        self.tf_from.text = self.vm?.currencies[rowTo]
+        self.tf_to.text = self.vm?.getCurrency(index: rowFrom)
+        self.tf_from.text = self.vm?.getCurrency(index: rowTo)
         
-        self.vm?.valuesSwapped()
+        self.vm?.valueSwaped()
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? VC_history, let rates = sender as? HistoricalRates {
+        if let vc = segue.destination as? VC_master, let rates = sender as? HistoricalRates {
             vc.history = rates
         }
     }
@@ -69,7 +69,7 @@ extension VC_home : UITextFieldDelegate {
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        self.vm?.updateCurrentAmout(amount: textField.text ?? "", isFirst_head: self.isFirst)
+        self.vm?.updateCurrencyOrAmount(currency: textField.text ?? "", isFirst_head: self.isFirst, isCurrency: false)
     }
 }
 
@@ -78,7 +78,7 @@ extension VC_home : UITextFieldDelegate {
 extension VC_home : UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return self.vm?.currencies.count ?? 0}
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return self.vm?.currenciesCount ?? 0}
 }
 
 
@@ -86,12 +86,12 @@ extension VC_home : UIPickerViewDataSource {
 extension VC_home : UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.vm!.currencies[row]
+        return self.vm!.getCurrency(index: row)
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.vm!.currencies.count > 0 {
-            self.vm?.updateValueForPicker(currency: self.vm!.currencies[row], isFirst_head: self.isFirst)
+        if self.vm!.currenciesCount > 0 {
+            self.vm?.updateCurrencyOrAmount(currency: self.vm!.getCurrency(index: row), isFirst_head: self.isFirst, isCurrency: true)
         }
     }
 }

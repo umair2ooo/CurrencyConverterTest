@@ -7,34 +7,20 @@ class VM_popularCurrencyRates {
     
     var popularCurrencyRates : PopularCurrRatesProtocol? {
         didSet {
-            self.delegate.popularCurrRatesFetched()
+            self.delegate?.popularCurrRatesFetched()
         }
     }
-    private let delegate : UpdateUIForPopularCurrency
+    private let delegate : UpdateUIForPopularCurrency?
+    
+    private var webManager : FetchPopularCurrencies?
     
     
-    
-    
-    init(delegate : UpdateUIForPopularCurrency, errorDelegate : ShowErrorProtocol?) {
+    init(delegate : UpdateUIForPopularCurrency?, errorDelegate : ShowErrorProtocol?) {
         self.errorDelegate = errorDelegate
         self.delegate = delegate
-        self.fetchPopularCurr()
-    }
-    
-    private func fetchPopularCurr() {
         
-        WebServices.popularCurr { [weak self] commonCurrRates, error in
-            
-            guard let self = self else { return }
-            
-            self.showErrorIfExists(delegate: self.errorDelegate, error: error) {
-                guard let commonCurrRates = commonCurrRates, commonCurrRates.rates?.count ?? 0 > 0 else {
-                    self.errorDelegate?.showError(message: Constants.GeneralConstants.noHistoryRecordFound)
-                    return
-                }
-                self.popularCurrencyRates = commonCurrRates
-            }
-        }
+        self.webManager = FetchPopularCurrencies(delegate: self)
+        self.webManager?.popularCurr()
     }
 }
 
@@ -49,6 +35,23 @@ extension VM_popularCurrencyRates : PopuplarCurrencyProtocol {
         return String(format: "%@: %.2f",
                       self.popularCurrencyRates!.rateArray[indexPath.row].currency,
                       self.popularCurrencyRates!.rateArray[indexPath.row].rate)
+    }
+}
+
+
+
+
+
+//MARK: - PopuplarCurrencyProtocol
+extension VM_popularCurrencyRates : PopularCurrenciesRatesProtocol {
+    func popularCurrenciesRates(values: PopularCurrRatesProtocol?, error: String?) {
+        
+        self.showErrorIfExists(delegate: self.errorDelegate, error: error) {
+            if let values = values {
+
+                self.popularCurrencyRates = values
+            }
+        }
     }
 }
 

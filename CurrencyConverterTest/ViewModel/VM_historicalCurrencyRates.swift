@@ -10,7 +10,6 @@ class VM_historicalCurrencyRates {
     }
 
     private let delegate : UpdateUIForHistoricalRates
-    private let errorDelegate : ShowErrorProtocol?
     private var historicalRts : [RateArrayModel]? {
         didSet {
             self.delegate.updateUIForHistoricalRates()
@@ -18,14 +17,14 @@ class VM_historicalCurrencyRates {
     }
 
     
-    init(delegate : UpdateUIForHistoricalRates, errorDelegate : ShowErrorProtocol?) {
+    init(delegate : UpdateUIForHistoricalRates) {
         
         self.delegate = delegate
-        self.errorDelegate = errorDelegate
     }
 }
 
 
+//MARK: - HistoricalCurrencyCalculator
 extension VM_historicalCurrencyRates : HistoricalCurrencyCalculator {
     
     func setHistory(history: HistoricalRatesProtocol) {
@@ -47,19 +46,5 @@ extension VM_historicalCurrencyRates : HistoricalCurrencyCalculator {
     
     func getDate(section: Int) -> String {
         return self.historicalRts![section].date
-    }
-}
-
-
-
-//MARK: - CheckErrorExistence
-extension VM_historicalCurrencyRates : CheckErrorExistence {
-    func showErrorIfExists(delegate: ShowErrorProtocol?, error: String?, success: () -> ()) {
-        
-        guard let error = error else {
-            success()
-            return
-        }
-        delegate?.showError(message: error)
     }
 }

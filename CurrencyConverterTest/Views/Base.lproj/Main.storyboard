@@ -106,84 +106,12 @@
                         <outlet property="tf_fromInput" destination="bUu-iE-51l" id="q8t-Zg-r5O"/>
                         <outlet property="tf_to" destination="V4N-wX-DWa" id="7Gz-45-ASO"/>
                         <outlet property="tf_toInput" destination="Phd-Af-iU7" id="40I-iN-ACM"/>
-                        <segue destination="NM9-iE-bzA" kind="show" identifier="segue_showHistory" id="Oem-3T-QU9"/>
+                        <segue destination="0xI-9L-n8F" kind="show" identifier="segue_showHistory" id="pDA-WI-kUF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1000" y="92"/>
-        </scene>
-        <!--history-->
-        <scene sceneID="7hf-UQ-Q59">
-            <objects>
-                <viewController storyboardIdentifier="VC_history" id="NM9-iE-bzA" customClass="VC_history" customModule="CurrencyConverterTest" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nix-yq-rD0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="vC4-fg-ep7">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DiR-mV-gmU">
-                                        <rect key="frame" x="0.0" y="0.0" width="206" height="808"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2zf-9K-UyH">
-                                                <rect key="frame" x="0.0" y="0.0" width="206" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YCe-g4-Cny">
-                                                <rect key="frame" x="0.0" y="28.5" width="206" height="779.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="NM9-iE-bzA" id="d55-Qf-h88"/>
-                                                    <outlet property="delegate" destination="NM9-iE-bzA" id="kNn-7s-5V6"/>
-                                                </connections>
-                                            </tableView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VNa-Wf-hkX">
-                                        <rect key="frame" x="208" y="0.0" width="206" height="808"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Popular Currency Rates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fno-W3-CO5">
-                                                <rect key="frame" x="0.0" y="0.0" width="206" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eZq-vd-Vq4">
-                                                <rect key="frame" x="0.0" y="28.5" width="206" height="779.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="NM9-iE-bzA" id="Ovh-wC-De7"/>
-                                                    <outlet property="delegate" destination="NM9-iE-bzA" id="p5Z-pq-ONx"/>
-                                                </connections>
-                                            </tableView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="jCm-ub-0WU"/>
-                        <color key="backgroundColor" systemColor="systemGray5Color"/>
-                        <constraints>
-                            <constraint firstItem="jCm-ub-0WU" firstAttribute="trailing" secondItem="vC4-fg-ep7" secondAttribute="trailing" id="3dg-Nz-gKX"/>
-                            <constraint firstItem="vC4-fg-ep7" firstAttribute="leading" secondItem="jCm-ub-0WU" secondAttribute="leading" id="lF2-6T-Vn1"/>
-                            <constraint firstItem="jCm-ub-0WU" firstAttribute="bottom" secondItem="vC4-fg-ep7" secondAttribute="bottom" constant="-34" id="lVp-uU-MWg"/>
-                            <constraint firstItem="vC4-fg-ep7" firstAttribute="top" secondItem="jCm-ub-0WU" secondAttribute="top" id="oRY-8d-wvV"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="0HB-WF-hVH"/>
-                    <connections>
-                        <outlet property="lbl_baseCurr" destination="2zf-9K-UyH" id="BL3-NK-0TJ"/>
-                        <outlet property="tv_history" destination="YCe-g4-Cny" id="NlA-Pk-0FH"/>
-                        <outlet property="tv_popularCurrRates" destination="eZq-vd-Vq4" id="Dij-5M-x4p"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1sq-Xt-ruo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1894" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Ie-JD-1S6">
@@ -202,6 +130,136 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4R-dM-YFj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="91.741071428571431"/>
+        </scene>
+        <!--master-->
+        <scene sceneID="eVy-Uo-nFD">
+            <objects>
+                <viewController storyboardIdentifier="VC_master" id="0xI-9L-n8F" customClass="VC_master" customModule="CurrencyConverterTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pOm-J3-s6L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XQy-Ku-zO1">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0F-wL-Lx4">
+                                        <rect key="frame" x="0.0" y="0.0" width="205" height="774"/>
+                                        <connections>
+                                            <segue destination="PmC-b0-phG" kind="embed" identifier="toHistory" id="CdH-Oc-2E8"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FR-d2-XhC">
+                                        <rect key="frame" x="209" y="0.0" width="205" height="774"/>
+                                        <connections>
+                                            <segue destination="n21-Fw-uKa" kind="embed" identifier="toPopular" id="7NL-WK-ab8"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4OD-cS-ILd"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstItem="XQy-Ku-zO1" firstAttribute="leading" secondItem="4OD-cS-ILd" secondAttribute="leading" id="Djw-T3-C05"/>
+                            <constraint firstItem="XQy-Ku-zO1" firstAttribute="top" secondItem="4OD-cS-ILd" secondAttribute="top" id="bQL-CB-hlN"/>
+                            <constraint firstItem="4OD-cS-ILd" firstAttribute="bottom" secondItem="XQy-Ku-zO1" secondAttribute="bottom" id="bxV-vl-ebi"/>
+                            <constraint firstItem="4OD-cS-ILd" firstAttribute="trailing" secondItem="XQy-Ku-zO1" secondAttribute="trailing" id="gDa-ox-q1T"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RGA-2N-mN7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JQT-5j-nOr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1997" y="92"/>
+        </scene>
+        <!--history-->
+        <scene sceneID="P4X-dK-sfq">
+            <objects>
+                <viewController storyboardIdentifier="VC_history" id="PmC-b0-phG" customClass="VC_history" customModule="CurrencyConverterTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MfN-N0-Ja2">
+                        <rect key="frame" x="0.0" y="0.0" width="205" height="774"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Zxg-zn-EsA">
+                                <rect key="frame" x="0.0" y="0.0" width="205" height="774"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="80s-mf-nov">
+                                        <rect key="frame" x="0.0" y="0.0" width="205" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FdS-jE-BCq">
+                                        <rect key="frame" x="0.0" y="24.5" width="205" height="749.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="PmC-b0-phG" id="B0e-e9-Poj"/>
+                                            <outlet property="delegate" destination="PmC-b0-phG" id="pA0-Fd-qdj"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Zxg-zn-EsA" secondAttribute="bottom" id="WVe-aD-5xl"/>
+                            <constraint firstItem="Zxg-zn-EsA" firstAttribute="leading" secondItem="MfN-N0-Ja2" secondAttribute="leading" id="bPq-6I-xoN"/>
+                            <constraint firstAttribute="trailing" secondItem="Zxg-zn-EsA" secondAttribute="trailing" id="hrL-uy-1tW"/>
+                            <constraint firstItem="Zxg-zn-EsA" firstAttribute="top" secondItem="MfN-N0-Ja2" secondAttribute="top" id="qfX-FZ-szi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lbl_baseCurr" destination="80s-mf-nov" id="Xaw-Hw-3mK"/>
+                        <outlet property="tv_history" destination="FdS-jE-BCq" id="wWn-4i-iV9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ZL-IM-24N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3009" y="-115"/>
+        </scene>
+        <!--popular Currencies-->
+        <scene sceneID="K2n-Nj-3z9">
+            <objects>
+                <viewController storyboardIdentifier="VC_popularCurrencies" id="n21-Fw-uKa" customClass="VC_popularCurrencies" customModule="CurrencyConverterTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z3U-gz-4th">
+                        <rect key="frame" x="0.0" y="0.0" width="205" height="774"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7kU-QD-X4f">
+                                <rect key="frame" x="0.0" y="0.0" width="205" height="774"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Popular currency rates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qJq-RQ-syG">
+                                        <rect key="frame" x="0.0" y="0.0" width="205" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zUQ-7M-VnY">
+                                        <rect key="frame" x="0.0" y="24.5" width="205" height="749.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="n21-Fw-uKa" id="JY3-wk-DfX"/>
+                                            <outlet property="delegate" destination="n21-Fw-uKa" id="UQo-Nu-4PI"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7kU-QD-X4f" secondAttribute="bottom" id="9Hy-u2-OJf"/>
+                            <constraint firstAttribute="trailing" secondItem="7kU-QD-X4f" secondAttribute="trailing" id="Xyw-Yh-tJw"/>
+                            <constraint firstItem="7kU-QD-X4f" firstAttribute="top" secondItem="Z3U-gz-4th" secondAttribute="top" id="eZu-EO-nsg"/>
+                            <constraint firstItem="7kU-QD-X4f" firstAttribute="leading" secondItem="Z3U-gz-4th" secondAttribute="leading" id="tzI-XG-Kfs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tv_popularCurrRates" destination="zUQ-7M-VnY" id="1jh-pO-qeG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0jI-AH-lbT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3431" y="457"/>
         </scene>
     </scenes>
     <resources>

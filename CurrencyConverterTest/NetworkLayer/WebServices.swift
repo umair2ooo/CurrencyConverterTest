@@ -1,44 +1,105 @@
 import Foundation
 
-class WebServices {
-    
+protocol FetchAndCalculateCurrencyProtocol {
 
-    static func symbols(completion : @escaping (Symobls?, String?)->()) {
+    func symbolsFetched(symbols : Symobls?, error : String?)
+    func exchangeRate(convertedValues : ConvertedResponse?, error : String?)
+}
+
+class FetchAndCalculateCurrency {
+    
+    var delegate : FetchAndCalculateCurrencyProtocol?
+    
+    init(delegate : FetchAndCalculateCurrencyProtocol?) {
+        self.delegate = delegate
+    }
+    
+    
+    func symbols() {
         
         let router = Router.symbols.getURL
         HTTP.execute(request: router, type: Symobls.self) { model, error in
-            completion(model as? Symobls, error)
+            self.delegate?.symbolsFetched(symbols: model as? Symobls, error: error)
         }
     }
     
     
-    static func exchangeRate(from : String, to : String, amount : Double, completion : @escaping (ConvertedResponse?, String?)->()) {
+    func exchangeRate(from : String, to : String, amount : Double) {
         
         let router = Router.convert(from: from, to: to, amount: amount).getURL
         HTTP.execute(request: router, type: ConvertedResponse.self) { model, error in
-            completion(model as? ConvertedResponse, error)
+            self.delegate?.exchangeRate(convertedValues: model as? ConvertedResponse, error: error)
         }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+protocol FetchHistoricalRatesProtocol {
+    func historicalRatesFetched(history : HistoricalRatesProtocol?, error : String?)
+}
+
+
+class FetchHistoricalRates {
+    
+    var delegate : FetchHistoricalRatesProtocol?
+    
+    init(delegate : FetchHistoricalRatesProtocol?) {
+        self.delegate = delegate
     }
     
     
-    static func timeseries(startDate : String,
+    func timeseries(startDate : String,
                            endDate : String,
                            symbols: String,
-                           baseCurrency: String,
-                           completion : @escaping (HistoricalRatesProtocol?, String?)->()) {
+                           baseCurrency: String) {
 
         let router = Router.timeseries(startDate: startDate, endDate: endDate, symbols: symbols, baseCurrency: baseCurrency).getURL
         HTTP.execute(request: router, type: HistoricalRates.self) { model, error in
-            completion(model as? HistoricalRatesProtocol, error)
+            self.delegate?.historicalRatesFetched(history: model as? HistoricalRatesProtocol, error: error)
         }
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+protocol PopularCurrenciesRatesProtocol {
+    func popularCurrenciesRates(values : PopularCurrRatesProtocol?, error: String?)
+}
+
+
+class FetchPopularCurrencies {
     
+    var delegate : PopularCurrenciesRatesProtocol?
     
-    static func popularCurr(completion : @escaping (PopularCurrRatesProtocol?, String?)->()) {
+    init(delegate : PopularCurrenciesRatesProtocol?) {
+        self.delegate = delegate
+    }
+    
+    func popularCurr() {
 
         let router = Router.latest.getURL
         HTTP.execute(request: router, type: PopularCurrencyRates.self) { model, error in
-            completion(model as? PopularCurrRatesProtocol, error)
+            self.delegate?.popularCurrenciesRates(values: model as? PopularCurrRatesProtocol, error: error)
         }
     }
 }

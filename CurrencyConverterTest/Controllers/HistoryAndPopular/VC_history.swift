@@ -6,19 +6,16 @@ class VC_history: VC_base {
     
     @IBOutlet weak var lbl_baseCurr: UILabel!
     @IBOutlet weak var tv_history: UITableView!
-    @IBOutlet weak var tv_popularCurrRates: UITableView!
     
     
     
     var history : HistoricalRatesProtocol! {
         didSet {
-            self.vm = VM_historicalCurrencyRates(delegate: self, errorDelegate: self)
-            self.vm_popularCurrency = VM_popularCurrencyRates(delegate: self, errorDelegate: self)
+            self.vm = VM_historicalCurrencyRates(delegate: self)
         }
     }
     
     private var vm : HistoricalCurrencyCalculator!
-    private var vm_popularCurrency : PopuplarCurrencyProtocol!
 
     
     override func viewDidLoad() {
@@ -31,7 +28,6 @@ class VC_history: VC_base {
     
     private func setupUI() {
         self.tv_history.sectionHeaderTopPadding = 0.0
-        self.tv_popularCurrRates.sectionHeaderTopPadding = 0.0
         
         self.title = Constants.GeneralConstants.history
         if let base = self.history.base {
@@ -45,13 +41,11 @@ class VC_history: VC_base {
 extension VC_history : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (tableView == self.tv_history) { return self.vm.historicalRtsCount ?? 0 }
-        return 1
+        return self.vm.historicalRtsCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == self.tv_history) { return self.vm.currCountOnEachDate(sectionIndex: section) }
-        return self.vm_popularCurrency.popularRtsCount
+        return self.vm.currCountOnEachDate(sectionIndex: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,8 +55,7 @@ extension VC_history : UITableViewDataSource {
             cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
 
-        if (tableView == self.tv_history) {cell!.textLabel?.text = self.vm.getCurrencyAndRate(indexPath: indexPath)}
-        else { cell!.textLabel?.text = self.vm_popularCurrency.getCurrencyAndRate(indexPath: indexPath) }
+        cell!.textLabel?.text = self.vm.getCurrencyAndRate(indexPath: indexPath)
         
         return cell!
     }
@@ -71,11 +64,9 @@ extension VC_history : UITableViewDataSource {
 
 //MARK: - UITableViewDelegate
 extension VC_history : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0
-    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return tableView == self.tv_history ? 50.0 : 0
+        return 50.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -96,13 +87,6 @@ extension VC_history : UITableViewDelegate {
     }
 }
 
-
-//MARK: - UpdateUIForPopularCurrency
-extension VC_history : UpdateUIForPopularCurrency {
-    func popularCurrRatesFetched () {
-        self.tv_popularCurrRates.reloadData()
-    }
-}
 
 
 //MARK: - UpdateUIForHistoricalRates

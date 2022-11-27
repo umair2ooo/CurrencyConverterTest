@@ -29,7 +29,6 @@ protocol ResponderProtocol {
 
 
 protocol CalculateConversionProtocol {
-    func valuesSwapped()
     func calculate()
 }
 
@@ -98,4 +97,24 @@ protocol CheckErrorExistence {
 
 protocol ShowErrorProtocol {
     func showError(message: String)
+}
+
+
+
+protocol CurrencyConversionProtocol {
+    var currenciesCount : Int { get }
+    func getCurrency(index : Int) -> String
+    func valueSwaped()
+    func updateCurrencyOrAmount(currency: String, isFirst_head: Bool, isCurrency : Bool)
+    func showHistory()
+}
+
+extension CurrencyConversionProtocol {
+    func showHistory() {}
+}
+
+
+
+protocol ShowHistoryProtocol {
+    func showHistory()
 }
