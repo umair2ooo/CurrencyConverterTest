@@ -1,12 +1,20 @@
 import Foundation
 
+protocol SymoblsModelProtocol {
+    var symbols: [String: String]? {get}
+    var symbolsArray : [String] {get}
+}
+
+
+extension Symobls : SymoblsModelProtocol {
+    var symbolsArray : [String] {
+        return self.symbols?.keys.compactMap({String($0)}) ?? []
+    }
+}
 
 class Symobls: ModelBase {
     
     var symbols: [String: String]?
-    var symbolsArray : [String] {
-        return self.symbols?.keys.compactMap({String($0)}) ?? []
-    }
 
    
     private enum CodingKeys: String, CodingKey {

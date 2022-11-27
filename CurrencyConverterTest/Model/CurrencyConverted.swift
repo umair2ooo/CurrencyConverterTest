@@ -1,7 +1,9 @@
 import Foundation
 
-// MARK: - Welcome
-class ConvertedResponse: ModelBase {
+
+
+
+class CurrencyConvertedModel: ModelBase {
     var query: Query?
     var info: Info?
     var historical, date: String?
@@ -36,7 +38,7 @@ class ConvertedResponse: ModelBase {
 
 
 
-extension ConvertedResponse: CustomStringConvertible {
+extension CurrencyConvertedModel: CustomStringConvertible {
     var description: String {
 //        let result = self.result?.format(numberStyle: .currency, decimalPlaces: 2)
         let formattedValue = String(format: "%.2f", self.result ?? 0.0)
@@ -90,4 +92,4 @@ class Query: Codable {
 }
 
 
-extension ConvertedResponse : ErrorVerificationInDecodable {}
+extension CurrencyConvertedModel : ErrorVerificationInDecodable {}

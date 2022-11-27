@@ -198,7 +198,7 @@ extension VM_currencyConversion : CheckErrorExistence {
 //MARK: - FetchAndCalculateCurrencyProtocol
 extension VM_currencyConversion : FetchAndCalculateCurrencyProtocol {
     
-    func symbolsFetched(symbols: Symobls?, error: String?) {
+    func symbolsFetched(symbols: SymoblsModelProtocol?, error: String?) {
         
         self.showErrorIfExists(delegate: self.errorDelegate, error: error) {
             
@@ -208,7 +208,7 @@ extension VM_currencyConversion : FetchAndCalculateCurrencyProtocol {
         }
     }
     
-    func exchangeRate(convertedValues: ConvertedResponse?, error: String?) {
+    func exchangeRate(convertedValues: CurrencyConvertedModel?, error: String?) {
         
         self.showErrorIfExists(delegate: self.errorDelegate, error: error) {
             if let convertedValues = convertedValues {

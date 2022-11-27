@@ -2,8 +2,8 @@ import Foundation
 
 protocol FetchAndCalculateCurrencyProtocol {
 
-    func symbolsFetched(symbols : Symobls?, error : String?)
-    func exchangeRate(convertedValues : ConvertedResponse?, error : String?)
+    func symbolsFetched(symbols : SymoblsModelProtocol?, error : String?)
+    func exchangeRate(convertedValues : CurrencyConvertedModel?, error : String?)
 }
 
 class FetchAndCalculateCurrency {
@@ -19,7 +19,7 @@ class FetchAndCalculateCurrency {
         
         let router = Router.symbols.getURL
         HTTP.execute(request: router, type: Symobls.self) { model, error in
-            self.delegate?.symbolsFetched(symbols: model as? Symobls, error: error)
+            self.delegate?.symbolsFetched(symbols: model as? SymoblsModelProtocol, error: error)
         }
     }
     
@@ -27,8 +27,8 @@ class FetchAndCalculateCurrency {
     func exchangeRate(from : String, to : String, amount : Double) {
         
         let router = Router.convert(from: from, to: to, amount: amount).getURL
-        HTTP.execute(request: router, type: ConvertedResponse.self) { model, error in
-            self.delegate?.exchangeRate(convertedValues: model as? ConvertedResponse, error: error)
+        HTTP.execute(request: router, type: CurrencyConvertedModel.self) { model, error in
+            self.delegate?.exchangeRate(convertedValues: model as? CurrencyConvertedModel, error: error)
         }
     }
 }
