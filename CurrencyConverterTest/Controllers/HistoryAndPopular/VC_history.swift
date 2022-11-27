@@ -29,7 +29,6 @@ class VC_history: VC_base {
     private func setupUI() {
         self.tv_history.sectionHeaderTopPadding = 0.0
         
-        self.title = Constants.GeneralConstants.history
         if let base = self.history.base {
             self.lbl_baseCurr.text = "\(Constants.GeneralConstants.from) \(base) \(Constants.GeneralConstants.to):"
         }
