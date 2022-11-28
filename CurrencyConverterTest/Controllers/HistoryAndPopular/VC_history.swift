@@ -11,17 +11,15 @@ class VC_history: VC_base {
     
     var history : HistoricalRatesProtocol! {
         didSet {
-            self.vm = VM_historicalCurrencyRates(delegate: self)
+            self.historicalRts = history.ratesArray
         }
     }
-    
-    private var vm : HistoricalCurrencyCalculator!
 
+    private var historicalRts : [RateArrayModel]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.vm.setHistory(history: self.history)
         self.setupUI()
     }
     
@@ -40,11 +38,11 @@ class VC_history: VC_base {
 extension VC_history : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.vm.historicalRtsCount ?? 0
+        return self.historicalRts?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.vm.currCountOnEachDate(sectionIndex: section)
+        return self.historicalRts![section].currencies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,7 +52,9 @@ extension VC_history : UITableViewDataSource {
             cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
 
-        cell!.textLabel?.text = self.vm.getCurrencyAndRate(indexPath: indexPath)
+        cell!.textLabel?.text = String(format: "%@: %.2f",
+                                       self.historicalRts![indexPath.section].currencies[indexPath.row].currency,
+                                       self.historicalRts![indexPath.section].currencies[indexPath.row].rate)
         
         return cell!
     }
@@ -76,7 +76,7 @@ extension VC_history : UITableViewDelegate {
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = self.vm.getDate(section: section)
+        label.text = self.historicalRts![section].date
         label.font = .systemFont(ofSize: 16)
         label.textColor = .white
         

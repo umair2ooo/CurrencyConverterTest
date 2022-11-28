@@ -54,6 +54,7 @@ protocol UpdateUIForHistoricalRates {
 }
 
 
+/*
 protocol HistoricalCurrencyCalculator {
     
     var historicalRtsCount : Int? {get}
@@ -62,6 +63,7 @@ protocol HistoricalCurrencyCalculator {
     func getDate(section : Int) -> String
     func setHistory(history : HistoricalRatesProtocol)
 }
+*/
 
 
 protocol HistoricalRatesProtocol {

@@ -1,7 +1,7 @@
 import Foundation
 
 
-
+/*
 class VM_historicalCurrencyRates {
     var history : HistoricalRatesProtocol! {
         didSet {
@@ -48,3 +48,4 @@ extension VM_historicalCurrencyRates : HistoricalCurrencyCalculator {
         return self.historicalRts![section].date
     }
 }
+ */
